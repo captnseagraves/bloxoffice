@@ -3,11 +3,14 @@ pragma solidity ^0.4.8;
 /*Need to write fallback function*/
 
 contract Event {
+  EventCreator creator
   address public organizer;
   mapping (address => uint) public registrantsPaid;
   uint public numRegistrants;
   uint public quota;
   uint public ticketPrice;
+  uint public eventDescription;
+
 
   event Deposit(address _from, uint _amount);  // so you can log these events
   event Refund(address _to, uint _amount);
@@ -18,12 +21,12 @@ contract Event {
     numRegistrants = 0;
 
   }
-  function buyTicket() payable public returns (bool success) {
+  function buyTicket(address _purchaser, uint _amountPaid) payable public returns (bool success) {
     if (numRegistrants >= quota) { return false; }
-    if (msg.value < ticketPrice) { return false; }
-    registrantsPaid[msg.sender] = msg.value;
+    if (_amountPaid < ticketPrice) { return false; }
+    registrantsPaid[_purchaser] = _amountPaid;
     numRegistrants++;
-    Deposit(msg.sender, msg.value);
+    Deposit(_purchaser, _amountPaid);
     return true;
   }
   function changeQuota(uint newquota) public {
