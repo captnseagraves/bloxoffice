@@ -3,7 +3,6 @@ pragma solidity ^0.4.8;
 /*Need to write fallback function*/
 
 contract Event {
-  EventCreator creator
   address public organizer;
   mapping (address => uint) public registrantsPaid;
   uint public numRegistrants;
