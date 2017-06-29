@@ -11,6 +11,11 @@ class Profile extends Component {
             <p>Edit your account details here.</p>
             <ProfileFormContainer />
           </div>
+          <div className="pure-u-1-1">
+            <h1>Your Ticekts</h1>
+            <p>User tickets will appear here</p>
+        
+          </div>
         </div>
       </main>
     )

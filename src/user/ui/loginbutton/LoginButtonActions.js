@@ -28,6 +28,7 @@ export function loginUser() {
 
       // Get current ethereum wallet.
       web3.eth.getCoinbase((error, coinbase) => {
+
         // Log errors, if any.
         if (error) {
           console.error(error);
@@ -41,6 +42,8 @@ export function loginUser() {
           .then(function(result) {
             // If no error, login user.
             var userName = web3.toUtf8(result)
+            console.log('userName', userName);
+            console.log('coinbase', coinbase);
 
             dispatch(userLoggedIn({"name": userName}))
 
