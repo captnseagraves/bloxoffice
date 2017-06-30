@@ -2,19 +2,27 @@ pragma solidity ^0.4.8;
 
 /*Need to write fallback function*/
 
-contract Event {
-  address public organizer;
+
+contract EventCreator {
+  function createEvent(uint quota, uint ticketPrice, bytes32 eventName, bytes32 eventDescription) returns (UserEvent eventAddress) {
+  return new UserEvent(quota, ticketPrice, eventName, eventDescription);
+  }
+}
+
+contract UserEvent {
+  EventCreator creator;
   mapping (address => uint) public registrantsPaid;
   uint public numRegistrants;
+  uint public eventName;
   uint public quota;
   uint public ticketPrice;
   uint public eventDescription;
-
+  address public organizer;
 
   event Deposit(address _from, uint _amount);  // so you can log these events
   event Refund(address _to, uint _amount);
 
-  function Event() { // Constructor
+  function UserEvent(uint quota, uint ticketPrice, bytes32 eventName, bytes32 eventDescription) {
     organizer = msg.sender;
     quota = 500;
     numRegistrants = 0;
