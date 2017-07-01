@@ -1,21 +1,21 @@
-var EventCreator = artifacts.require("./Tickets.sol");
+var TicketContract = artifacts.require("./Tickets.sol");
+var EventCreator = artifacts.require("./EventCreator.sol");
+	var UserEvent = artifacts.require("./UserEvent.sol");
 
-contract('EventCreator', function(accounts) {
+contract('TicketContract', function(accounts) {
 	var owner_account = accounts[0];
   var sender_account = accounts[1];
 
 
 	it("Should create new event with specified parameters", function(done) {
-console.log(EventCreator.new({from: owner_account}));
-  	EventCreator.createEvent(500, 5, 'dance', 'move feet', {from: owner_account}).then(
+  	TicketContract.createEvent(500, 5, 'dance', 'move feet', {from: owner_account}).then(
   		function(theEvent) {
   		assert.equal(quota, 500, "Quota doesn't match!");
   	}).catch(done);
   });
 
   it("Initial conference settings should match", function(done) {
-
-  	EventCreator.new({from: owner_account}).then(
+  	TicketContract.new({from: owner_account}).then(
   		function(conference) {
   			conference.quota.call().then(
   				function(quota) {
@@ -37,7 +37,7 @@ console.log(EventCreator.new({from: owner_account}));
 
   it("Should update quota", function(done) {
 
-  	EventCreator.new({from: owner_account}).then(
+  	TicketContract.new({from: owner_account}).then(
   		function(conference) {
   			conference.quota.call().then(
   				function(quota) {
@@ -59,7 +59,7 @@ console.log(EventCreator.new({from: owner_account}));
 
   it("Should let you buy a ticket", function(done) {
 
-  	EventCreator.new({ from: accounts[0] }).then(
+  	TicketContract.new({ from: accounts[0] }).then(
   		function(conference) {
 
         var ticketPrice = web3.toWei(.05, 'ether');
@@ -88,7 +88,7 @@ console.log(EventCreator.new({from: owner_account}));
 
   it("Should issue a refund by owner only", function(done) {
 
-    EventCreator.new({ from: accounts[0] }).then(
+    TicketContract.new({ from: accounts[0] }).then(
       function(conference) {
 
         var ticketPrice = web3.toWei(.05, 'ether');
