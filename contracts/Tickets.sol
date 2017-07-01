@@ -16,8 +16,23 @@ contract EventCreator {
    return allEvents.length;
  }
 
-  function createEvent(uint quota, uint ticketPrice, string eventName, string eventDescription) public returns (address newUserEvent) {
-    UserEvent ue = new UserEvent(quota, ticketPrice, eventName, eventDescription);
+  function createEvent(
+    uint quota,
+    uint ticketPrice,
+    string eventName,
+    string eventDescription,
+    string eventLocation,
+    string imageURL)
+    public
+    returns (address newUserEvent)
+    {
+    UserEvent ue = new UserEvent(
+      quota,
+      ticketPrice,
+      eventName,
+      eventDescription,
+      eventLocation,
+      imageURL);
     allEvents.push(ue);
     return ue;
   }
@@ -36,22 +51,34 @@ contract UserEvent {
   /*Need to create Array of tickets based on quota*/
   EventCreator creator;
   mapping (address => uint) public registrantsPaid;
+  address public organizer;
   uint public numRegistrants = 0;
-  uint public eventName;
   uint public quota;
   uint public ticketPrice;
-  uint public eventDescription;
-  address public organizer;
+  string public eventName;
+  string public eventDescription;
+  string public eventLocation;
+  string public imageURL;
+
 
   event Deposit(address _from, uint _amount);  // so you can log these events
   event Refund(address _to, uint _amount);
 
-  function UserEvent(uint _quota, uint _ticketPrice, bytes32 _eventName, bytes32 _eventDescription) {
+  function UserEvent(
+    uint _quota,
+    uint _ticketPrice,
+    string _eventName,
+    string _eventDescription,
+    string _eventLocation,
+    string _imageURL)
+    {
     organizer = msg.sender;
     quota = _quota;
     ticketPrice = _ticketPrice;
     eventName = _eventName;
     eventDescription = _eventDescription;
+    eventLocation = _eventLocation;
+    imageURL = _imageURL;
   }
 
   /*function something(
@@ -68,7 +95,7 @@ contract UserEvent {
     if (numRegistrants >= quota)
       throw;
 
-    if (_amountPaid != ticketPrice)
+    if (msg.value != ticketPrice)
       throw;
 
     registrantsPaid[msg.sender] = msg.value;
@@ -111,8 +138,8 @@ contract UserEvent {
     if (registrantsPaid[recipient] == amount) {
       address myAddress = this;
       if (myAddress.balance >= amount) {
-        if (!recipient.transfer(amount))
-          throw; // determine the difference with send, guards against reentrancy?
+        /*if (!recipient.transfer(amount))
+          throw; // determine the difference with send, guards against reentrancy?*/
 
         registrantsPaid[recipient] = 0;
         numRegistrants--;

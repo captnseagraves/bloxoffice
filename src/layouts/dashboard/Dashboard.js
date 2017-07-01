@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
+
 
 class Dashboard extends Component {
   constructor(props, { authData }) {
@@ -6,12 +8,20 @@ class Dashboard extends Component {
     authData = this.props
   }
 
+  clickHandler(event) {
+  console.log('were here');
+}
+
   render() {
     console.log(this.props.authData);
     return(
       <main className="container">
         <div className="pure-g">
           <div className="pure-u-1-1">
+          <h1>Create a new event</h1>
+
+          <button><Link to="/createEvent" className="pure-menu-link">Create New Event</Link></button>
+
             <h1>Dashboard</h1>
             <p><strong>Congratulations {this.props.authData.name}!</strong> If you're seeing this page, you've logged in with your own smart contract successfully.</p>
           </div>
@@ -22,6 +32,7 @@ class Dashboard extends Component {
             <p>Events will be listed here</p>
           </div>
         </div>
+
       </main>
     )
   }
