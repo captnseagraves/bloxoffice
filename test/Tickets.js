@@ -7,6 +7,7 @@ contract('TicketContract', function(accounts) {
   var sender_account = accounts[1];
 
 
+
 	it("Should create new event with specified parameters", function(done) {
   	TicketContract.createEvent(500, 5, 'dance', 'move feet', {from: owner_account}).then(
   		function(theEvent) {

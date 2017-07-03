@@ -15,6 +15,7 @@ function userLoggedIn(user) {
 export function loginUser() {
   let web3 = store.getState().web3.web3Instance
 
+  console.log(web3);
   // Double-check web3's status.
   if (typeof web3 !== 'undefined') {
 
