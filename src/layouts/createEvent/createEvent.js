@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 class CreateEventForm extends Component {
   constructor(props) {
     super(props)
+    console.log('super', super(props));
 
     this.state = {
       name: ''
@@ -20,8 +21,9 @@ class CreateEventForm extends Component {
     {
       return alert('Please fill in your name.')
     }
+    console.log('props', this.props);
 
-    this.props.onSignUpFormSubmit(this.state.name)
+    // this.props.onSignUpFormSubmit(this.state.name)
   }
 
   render() {

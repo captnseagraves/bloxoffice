@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class SignUpForm extends Component {
   constructor(props) {
     super(props)
-
+console.log("sign up super", super(props));
     this.state = {
       name: ''
     }
@@ -20,7 +20,7 @@ class SignUpForm extends Component {
     {
       return alert('Please fill in your name.')
     }
-
+    console.log(this.props);
     this.props.onSignUpFormSubmit(this.state.name)
   }
 

@@ -4,7 +4,7 @@ import store from '../../../store'
 
 const contract = require('truffle-contract')
 
-export function signUpUser(name) {
+export function createEventForm(name) {
   let web3 = store.getState().web3.web3Instance
 
   // Double-check web3's status.

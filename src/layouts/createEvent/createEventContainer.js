@@ -8,17 +8,17 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSignUpFormSubmit: (name) => {
+    onCreateEventFormSubmit: (name) => {
       event.preventDefault();
 
-      dispatch(signUpUser(name))
+      dispatch(createEventForm(name))
     }
   }
 }
 
-const SignUpFormContainer = connect(
+const createEventFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(createEventForm)
 
-export default SignUpFormContainer
+export default createEventFormContainer
