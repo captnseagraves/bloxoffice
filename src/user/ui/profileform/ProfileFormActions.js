@@ -1,4 +1,4 @@
-import AuthenticationContract from '../../../../build/contracts/Authentication.json'
+import AuthenticationContract from '../../../../build/contracts/EventCreator.json'
 import store from '../../../store'
 
 const contract = require('truffle-contract')
@@ -35,13 +35,28 @@ export function updateUser(name) {
         authentication.deployed().then(function(instance) {
           authenticationInstance = instance
           // Attempt to login user.
-          authenticationInstance.update(name, {from: coinbase})
+
+          console.log('hello');
+          // console.log(instance);
+          console.log(instance);
+          console.log(instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}));
+
+
+          console.log('event 1', instance.allEvents.length)
+
+          console.log('number of events', instance.getContractCount());
+
+          console.log('allEvents', 0xca02759ba292296134f06d8be7f7683bd0a79eda.buyTicket());
+
+
+
+          authenticationInstance.createEvent.call(500, 5, 'dance', 'move feet', 'picture', {from: coinbase})
           .then(function(result) {
             // If no error, update user.
 
-            dispatch(userUpdated({"name": name}))
-
-            return alert('Name updated!')
+            // dispatch(userUpdated({"name": name}))
+            console.log(result);
+            return alert('Event Create!')
           })
           .catch(function(result) {
             // If error...

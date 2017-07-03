@@ -29,6 +29,7 @@ export function createEventForm(name) {
           authenticationInstance = instance
 
           console.log('hello');
+          console.log(instance);
           // // Attempt to sign up user.
           // authenticationInstance.signup(name, {from: coinbase})
           // .then(function(result) {

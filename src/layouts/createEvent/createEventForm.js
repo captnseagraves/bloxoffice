@@ -1,6 +1,7 @@
+
 import React, { Component } from 'react'
 
-class SignUpForm extends Component {
+class CreateEventForm extends Component {
   constructor(props) {
     super(props)
 console.log("sign up super", super());
@@ -41,4 +42,22 @@ console.log("sign up super", super());
   }
 }
 
-export default SignUpForm
+export default CreateEventForm
+
+
+    // <main className="container">
+    //   <div className="pure-g">
+    //     <div className="pure-u-1-1">
+    //     <h1>Create a new event</h1>
+    //       <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit.bind(this)}>
+    //     <input id="eventName" placeholder="Event Name"></input><br></br>
+    //     <input id="eventDescription"placeholder="Event Description"></input><br></br>
+    //     <input id="eventLocation"placeholder="Event Location"></input><br></br>
+    //     <input id="imageURL"placeholder="Image URL"></input><br></br>
+    //     <input id="quota"placeholder="Capacity - Number Of Tickets To Create"></input><br></br>
+    //     <input id="ticketPrice"placeholder="Ticket Price"></input><br></br>
+    //     <button onClick={this.clickHandler.bind(this)} type="button" name="button">Create Event</button>
+    //       </form>
+    //     </div>
+    //   </div>
+    // </main>

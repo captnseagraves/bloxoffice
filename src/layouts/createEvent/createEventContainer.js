@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import createEventForm from './createEvent'
+import CreateEventForm from './createEvent'
 import { signUpUser } from './createEventActions'
 
 const mapStateToProps = (state, ownProps) => {
@@ -19,6 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 const createEventFormContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(createEventForm)
+)(CreateEventForm)
 
 export default createEventFormContainer

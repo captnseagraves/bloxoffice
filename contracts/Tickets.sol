@@ -8,6 +8,14 @@ contract EventCreator {
   /*index of created events*/
   address[] public allEvents;
 
+  function getAllEvents()
+  public
+  constant
+  returns(address[] allEvents)
+ {
+   return allEvents;
+ }
+
   function getContractCount()
   public
   constant
