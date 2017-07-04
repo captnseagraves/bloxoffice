@@ -1,5 +1,6 @@
-import AuthenticationContract from '../../../../build/contracts/EventCreator.json'
+import AuthenticationContract from '../../../../build/contracts/UserEvent.json'
 import store from '../../../store'
+
 
 const contract = require('truffle-contract')
 
@@ -36,26 +37,27 @@ export function updateUser(name) {
           authenticationInstance = instance
           // Attempt to login user.
 
-          console.log('hello');
-          // console.log(instance);
-          console.log(instance);
-          console.log(instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}));
+          // console.log('hello');
+          // // console.log(instance);
+          // console.log('instance', instance);
+          // instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}).then(function(result){
+          //   console.log(result);
+          // })
 
+          // console.log('number of events', instance.getContractCount());
 
-          console.log('event 1', instance.allEvents.length)
+          // authentication.at('0x749ebd7bd9099cc50b9c290ee8f59601f4a61c74').then(function(instance2){
+          //   console.log(instance2);
+          // })
 
-          console.log('number of events', instance.getContractCount());
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
 
-          console.log('allEvents', 0xca02759ba292296134f06d8be7f7683bd0a79eda.buyTicket());
-
-
-
-          authenticationInstance.createEvent.call(500, 5, 'dance', 'move feet', 'picture', {from: coinbase})
-          .then(function(result) {
-            // If no error, update user.
-
-            // dispatch(userUpdated({"name": name}))
+          //
+          instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}).then(function(result){
             console.log(result);
+
+
+
             return alert('Event Create!')
           })
           .catch(function(result) {

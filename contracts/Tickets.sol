@@ -6,7 +6,10 @@ pragma solidity ^0.4.8;
 contract EventCreator {
 
   /*index of created events*/
+
   address[] public allEvents;
+
+  event createContract(address _from, string _eventName);
 
   function getAllEvents()
   public
@@ -24,7 +27,7 @@ contract EventCreator {
    return allEvents.length;
  }
 
-  function createEvent(
+  /*function createEvent(
     uint quota,
     uint ticketPrice,
     string eventName,
@@ -41,9 +44,10 @@ contract EventCreator {
       eventDescription,
       eventLocation,
       imageURL);
+    createContract(this, eventName);
     allEvents.push(ue);
-    return ue;
-  }
+    return ue;*/
+  /*}*/
   /*function createEvent(uint quota, uint ticketPrice, bytes32 eventName, bytes32 eventDescription) returns (UserEvent eventAddress) {
   return new UserEvent(quota, ticketPrice, eventName, eventDescription);
   }*/
@@ -54,7 +58,7 @@ contract EventCreator {
   }*/
 }
 
-contract UserEvent {
+contract UserEvent is EventCreator {
 
   /*Need to create Array of tickets based on quota*/
   EventCreator creator;
@@ -69,10 +73,12 @@ contract UserEvent {
   string public imageURL;
 
 
+  event newEvent(address _from, string _eventName);
+
   event Deposit(address _from, uint _amount);  // so you can log these events
   event Refund(address _to, uint _amount);
 
-  function UserEvent(
+  function createEvent(
     uint _quota,
     uint _ticketPrice,
     string _eventName,
@@ -87,6 +93,8 @@ contract UserEvent {
     eventDescription = _eventDescription;
     eventLocation = _eventLocation;
     imageURL = _imageURL;
+    EventCreator.allEvents.push(this);
+    newEvent(this, eventName);
   }
 
   /*function something(
