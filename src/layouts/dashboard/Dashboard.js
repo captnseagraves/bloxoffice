@@ -1,6 +1,57 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import UserEvent from '../../../build/contracts/UserEvent.json'
+import AuthenticationContract from '../../../build/contracts/UserEvent.json'
+import store from '../../store'
+
+const contract = require('truffle-contract')
+
+export function updateUser(name) {
+  let web3 = store.getState().web3.web3Instance
+
+  // Double-check web3's status.
+  if (typeof web3 !== 'undefined') {
+
+    return function(dispatch) {
+      // Using truffle-contract we create the authentication object.
+      const authentication = contract(AuthenticationContract)
+      authentication.setProvider(web3.currentProvider)
+
+      // Declaring this for later so we can chain functions on Authentication.
+      var authenticationInstance
+
+      // Get current ethereum wallet.
+      web3.eth.getCoinbase((error, coinbase) => {
+        // Log errors, if any.
+        if (error) {
+          console.error(error);
+        }
+
+        authentication.deployed().then(function(instance) {
+          authenticationInstance = instance
+          // Attempt to login user.
+
+
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
+
+          //
+          instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}).then(function(result){
+            console.log(result);
+            localStorage.setItem('Event', result.logs[1].address)
+
+
+            return alert('Event Create!')
+          })
+          .catch(function(result) {
+            // If error...
+          })
+        })
+      })
+    }
+  } else {
+    console.error('Web3 is not initialized.');
+  }
+}
+
 
 class Dashboard extends Component {
   constructor(props, { authData }) {
@@ -8,13 +59,18 @@ class Dashboard extends Component {
     authData = this.props
   }
 
+ComponentWillMount(){
+  updateUser()
+}
+
   clickHandler(event) {
   console.log('were here');
 }
 
+
   render() {
     console.log(this.props.authData);
-      console.log(UserEvent.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
+
     return(
       <main className="container">
         <div className="pure-g">

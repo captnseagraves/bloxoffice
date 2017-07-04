@@ -12,8 +12,9 @@ function userUpdated(user) {
   }
 }
 
-export function updateUser(name) {
+export function updateUser(eventName, eventDescription, eventLocation, imageURL, quota, ticketPrice) {
   let web3 = store.getState().web3.web3Instance
+  console.log(eventName, eventDescription, eventLocation, imageURL, quota, ticketPrice);
 
   // Double-check web3's status.
   if (typeof web3 !== 'undefined') {
@@ -39,11 +40,22 @@ export function updateUser(name) {
 
 
           console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventDescription.call());
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventLocation.call());
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').imageURL.call());
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').quota.call());
+          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').ticketPrice.call());
 
           //
-          instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}).then(function(result){
+          instance.createEvent(quota, ticketPrice, eventName, eventDescription, eventLocation, imageURL, {from: coinbase, gas: 900000}).then(function(result){
             console.log(result);
 
+            localStorage.setItem('eventName', 'test')
+            localStorage.setItem('eventDescrtiption', eventDescription)
+            localStorage.setItem('eventLocation', eventLocation)
+            localStorage.setItem('imageURL', imageURL)
+            localStorage.setItem('quota', quota)
+            localStorage.setItem('ticketPrice', ticketPrice)
 
 
             return alert('Event Create!')
