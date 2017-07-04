@@ -37,18 +37,6 @@ export function updateUser(name) {
           authenticationInstance = instance
           // Attempt to login user.
 
-          // console.log('hello');
-          // // console.log(instance);
-          // console.log('instance', instance);
-          // instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}).then(function(result){
-          //   console.log(result);
-          // })
-
-          // console.log('number of events', instance.getContractCount());
-
-          // authentication.at('0x749ebd7bd9099cc50b9c290ee8f59601f4a61c74').then(function(instance2){
-          //   console.log(instance2);
-          // })
 
           console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-
+import UserEvent from '../../../build/contracts/UserEvent.json'
 
 class Dashboard extends Component {
   constructor(props, { authData }) {
@@ -14,6 +14,7 @@ class Dashboard extends Component {
 
   render() {
     console.log(this.props.authData);
+      console.log(UserEvent.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
     return(
       <main className="container">
         <div className="pure-g">
