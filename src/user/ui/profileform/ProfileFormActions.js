@@ -5,10 +5,11 @@ import store from '../../../store'
 const contract = require('truffle-contract')
 
 export const USER_UPDATED = 'USER_UPDATED'
-function userUpdated(user) {
+function userUpdated(transaction) {
+  console.log('userUpdated');
   return {
     type: USER_UPDATED,
-    payload: user
+    data: transaction
   }
 }
 
@@ -39,26 +40,29 @@ export function updateUser(eventName, eventDescription, eventLocation, imageURL,
           // Attempt to login user.
 
 
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventDescription.call());
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventLocation.call());
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').imageURL.call());
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').quota.call());
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').ticketPrice.call());
+          console.log(authentication.at('0x55990b4e91220aa1e95053137cc32340db0e7e64').eventName.call());
+          console.log(authentication.at('0x55990b4e91220aa1e95053137cc32340db0e7e64').eventDescription.call());
+          console.log(authentication.at('0x55990b4e91220aa1e95053137cc32340db0e7e64').eventLocation.call());
+          console.log(authentication.at('0x55990b4e91220aa1e95053137cc32340db0e7e64').imageURL.call());
+          console.log(authentication.at('0x55990b4e91220aa1e95053137cc32340db0e7e64').quota.call());
+          console.log(authentication.at('0x55990b4e91220aa1e95053137cc32340db0e7e64').ticketPrice.call());
 
           //
           instance.createEvent(quota, ticketPrice, eventName, eventDescription, eventLocation, imageURL, {from: coinbase, gas: 900000}).then(function(result){
             console.log(result);
 
-            localStorage.setItem('eventName', 'test')
-            localStorage.setItem('eventDescrtiption', eventDescription)
+            localStorage.setItem('eventName', eventName)
+            localStorage.setItem('eventDescription', eventDescription)
             localStorage.setItem('eventLocation', eventLocation)
             localStorage.setItem('imageURL', imageURL)
             localStorage.setItem('quota', quota)
             localStorage.setItem('ticketPrice', ticketPrice)
+            localStorage.setItem('contractAddress', result.logs[0].address)
+            localStorage.setItem('coinbase', coinbase)
+            localStorage.setItem('transactionAddress', result.receipt.transactionHash)
+            console.log('in the action', result);
 
-
-            return alert('Event Create!')
+            return dispatch(userUpdated(result));
           })
           .catch(function(result) {
             // If error...

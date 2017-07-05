@@ -33,10 +33,9 @@ ReactDOM.render((
       <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} />
-          <Route path="dashboard" component={UserIsAuthenticated(Dashboard)} />
+          <Route path="buy" component={UserIsAuthenticated(Dashboard)} />
           <Route path="signup" component={UserIsNotAuthenticated(SignUp)} />
-          <Route path="profile" component={UserIsAuthenticated(Profile)} />
-          <Route path="createEvent" component={UserIsAuthenticated(createEvent)} />
+          <Route path="createEvent" component={UserIsAuthenticated(Profile)} />
         </Route>
       </Router>
     </Provider>

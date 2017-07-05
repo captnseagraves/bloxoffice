@@ -172,8 +172,32 @@
       "links": {},
       "address": "0x0da437d59ecce6e585743700f21242e17f97b134",
       "updated_at": 1499128485762
+    },
+    "1499187241172": {
+      "events": {
+        "0x375d5234d3d86f855700970d85ac6590e012820f06ee8801abb43d4836456951": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_eventName",
+              "type": "string"
+            }
+          ],
+          "name": "createContract",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x8e460d9d725ae706aa6cff22a3873687f7a73e1e",
+      "updated_at": 1499187360505
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1499128485762
+  "updated_at": 1499187360505
 }

@@ -4,7 +4,8 @@ import { updateUser } from './ProfileFormActions'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    eventName: state.eventName
+    eventName: state.eventName,
+    transactionObject: state.user.transactionObject
   }
 }
 

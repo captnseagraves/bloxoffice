@@ -170,3 +170,43 @@ code {
     color: rgba(255, 255, 255, 1);
     text-shadow: 2px 2px 0 #000000;
  }
+
+.borderCenter {
+  border: 2px solid #000000;
+  border-radius: 10px;
+  text-align: center;
+  margin: auto;
+  margin-left: 30vmin;
+  margin-right: 30vmin;
+}
+
+.card-img-top {
+  height: 30vw;
+  padding-top: 3vmin;
+}
+
+.marginTopBottom {
+  margin-top: 3vmin;
+  margin-bottom: 3vmin;
+}
+
+.inputForm {
+  display: inline-block;
+  padding: 5vmin;
+}
+
+.inputDisplay {
+  display:inline;
+}
+
+.label {
+  letter-spacing: .1vmin;
+}
+
+.inputMargin {
+  margin-right: 1vmin !important;
+}
+
+.green {
+  color: green;
+}

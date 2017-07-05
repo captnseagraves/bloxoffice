@@ -1,72 +1,65 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import AuthenticationContract from '../../../build/contracts/UserEvent.json'
-import store from '../../store'
+
 
 const contract = require('truffle-contract')
-
-export function updateUser(name) {
-  let web3 = store.getState().web3.web3Instance
-
-  // Double-check web3's status.
-  if (typeof web3 !== 'undefined') {
-
-    return function(dispatch) {
-      // Using truffle-contract we create the authentication object.
-      const authentication = contract(AuthenticationContract)
-      authentication.setProvider(web3.currentProvider)
-
-      // Declaring this for later so we can chain functions on Authentication.
-      var authenticationInstance
-
-      // Get current ethereum wallet.
-      web3.eth.getCoinbase((error, coinbase) => {
-        // Log errors, if any.
-        if (error) {
-          console.error(error);
-        }
-
-        authentication.deployed().then(function(instance) {
-          authenticationInstance = instance
-          // Attempt to login user.
-
-
-          console.log(authentication.at('0x7755978ec177dd03f83dfcccc4d26454328734db').eventName.call());
-
-          //
-          instance.createEvent(500, 5, 'dance', 'move feet', 'Eldo', 'picture', {from: coinbase, gas: 900000}).then(function(result){
-            console.log(result);
-            localStorage.setItem('Event', result.logs[1].address)
-
-
-            return alert('Event Create!')
-          })
-          .catch(function(result) {
-            // If error...
-          })
-        })
-      })
-    }
-  } else {
-    console.error('Web3 is not initialized.');
-  }
-}
-
 
 class Dashboard extends Component {
   constructor(props, { authData }) {
     super(props)
     authData = this.props
-  }
 
-ComponentWillMount(){
-  updateUser()
+  this.state = {
+    eventName: '',
+    eventDescription: '',
+    eventLocation: '',
+    imageURL: '',
+    quota: '',
+    ticketPrice: '',
+    userWallet: '',
+    contractAddress: '',
+    transactionAddress: '',
+    hasSubmitted: false
+  }
 }
 
   clickHandler(event) {
   console.log('were here');
+  this.setState({
+    hasSubmitted: true
+  })
 }
 
+componentWillMount(){
+  this.setState({
+    eventName: localStorage.getItem('eventName'),
+    eventDescription: localStorage.getItem('eventDescription'),
+    eventLocation: localStorage.getItem('eventLocation'),
+    imageURL: localStorage.getItem('imageURL'),
+    quota: localStorage.getItem('quota'),
+    ticketPrice: localStorage.getItem('ticketPrice'),
+    userWallet: localStorage.getItem('coinbase'),
+    contractAddress: localStorage.getItem('contractAddress'),
+    transactionAddress: localStorage.getItem('transactionAddress')
+  })
+}
+
+renderSubmitInfo(){
+  if(this.state.hasSubmitted == true){
+    return (
+      <div>
+      <h1 className="green">Ticket purchased! Have fun at {this.state.eventName}!</h1>
+      <p>Contract Address: {this.state.contractAddress}</p>
+      <p>Ticket Purchased from Wallet Address: {this.state.userWallet}</p>
+      <p> Transaction Address: </p>
+      </div>
+    )
+  } else {
+    return(
+      <div></div>
+    )
+  }
+}
 
   render() {
     console.log(this.props.authData);
@@ -75,18 +68,31 @@ ComponentWillMount(){
       <main className="container">
         <div className="pure-g">
           <div className="pure-u-1-1">
-          <h1>Create a new event</h1>
 
-          <button><Link to="/createEvent" className="pure-menu-link">Create New Event</Link></button>
 
-            <h1>Dashboard</h1>
-            <p><strong>Congratulations {this.props.authData.name}!</strong> If you're seeing this page, you've logged in with your own smart contract successfully.</p>
+          <div className="col-sm-6 col-md-4 col-lg-3 mt-4 text-center">
+              <div className="card">
+              <h1 className="moveCenter marginTopBottom">Buy Tickets</h1>
+              <div className="borderCenter">
+                  <img className="card-img-top" src={this.state.imageURL}></img><br></br>
+                  <div className="card-block">
+                      <h1 className="card-title mt-3">{this.state.eventName}</h1>
+                      <p>Where: {this.state.eventLocation}</p>
+                      <p>What: {this.state.eventDescription}</p>
+                      <div className="card-text">
+                        <p>Ticket Price: {this.state.ticketPrice} ETH</p>
+                        <p>Tickets available: {this.state.quota}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="moveCenter marginTopBottom">
+                  {this.renderSubmitInfo()}
+                  <button onClick={this.clickHandler.bind(this)} type="button" name="buyTicket" className="pure-button pure-button-primary">Purchase Ticket</button>
+                  </div>
+              </div>
           </div>
-          <div className="pure-u-1-1">
-          <h1>Search field will be here</h1>
-            <h1>Events</h1>
-            <p>Click on an event to see more and purchase tickets!</p>
-            <p>Events will be listed here</p>
+
+
           </div>
         </div>
 

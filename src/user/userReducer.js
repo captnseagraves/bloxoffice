@@ -3,7 +3,18 @@ const initialState = {
 }
 
 const userReducer = (state = initialState, action) => {
-  if (action.type === 'USER_LOGGED_IN' || action.type === 'USER_UPDATED')
+  console.log('IN THE REDUCeR', action.type);
+console.log('IN THE REDUCeR', typeof action.type);
+
+if (action.type === 'USER_UPDATED')
+{
+  console.log('in the reducer');
+  return Object.assign({}, state, {
+    transactionObject: action.data
+  })
+}
+
+  if (action.type === 'USER_LOGGED_IN')
   {
     return Object.assign({}, state, {
       data: action.payload
@@ -16,6 +27,7 @@ const userReducer = (state = initialState, action) => {
       data: null
     })
   }
+
 
   return state
 }

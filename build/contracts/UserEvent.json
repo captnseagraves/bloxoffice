@@ -788,8 +788,83 @@
       "links": {},
       "address": "0x7755978ec177dd03f83dfcccc4d26454328734db",
       "updated_at": 1499128485748
+    },
+    "1499187241172": {
+      "events": {
+        "0x019a49222a41500bd9ef06845153c35eb0c43c4586c6650970511edad37bf715": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_eventName",
+              "type": "string"
+            }
+          ],
+          "name": "newEvent",
+          "type": "event"
+        },
+        "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Deposit",
+          "type": "event"
+        },
+        "0xbb28353e4598c3b9199101a66e0989549b659a59a54d2c27fbb183f1932c8e6d": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "Refund",
+          "type": "event"
+        },
+        "0x375d5234d3d86f855700970d85ac6590e012820f06ee8801abb43d4836456951": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_from",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_eventName",
+              "type": "string"
+            }
+          ],
+          "name": "createContract",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x55990b4e91220aa1e95053137cc32340db0e7e64",
+      "updated_at": 1499187360499
     }
   },
   "schema_version": "0.0.5",
-  "updated_at": 1499128485748
+  "updated_at": 1499187360499
 }
