@@ -11,9 +11,17 @@ class ProfileForm extends Component {
       imageURL: this.props.imageURL,
       quota: this.props.quota,
       ticketPrice: this.props.ticketPrice,
-      hasSubmitted: false
+      hasSubmitted: false,
+      userWallet: ''
     }
   }
+
+  componentWillMount(){
+    this.setState({
+      userWallet: localStorage.getItem('coinbase'),
+    })
+  }
+
 
   onNameChange(event) {
     this.setState({ eventName: event.target.value })
@@ -60,15 +68,16 @@ renderSubmitInfo(){
   if(this.state.hasSubmitted == true && !this.props.transactionObject){
     return (
       <div>
-      <h1 className="green">Event has been successfully created!</h1>
+      <h1 className="yellow">Your event transaction is pending...</h1>
       </div>
     )
   } else if (this.state.hasSubmitted == true && this.props.transactionObject) {
     return(
     <div>
-    <p>Contract Address: </p>
-    <p>Contract Deployed From Wallet Address: </p>
-    <p> Transaction Address: </p>
+    <h1 className="green">Event has been successfully created!</h1>
+    <p>Contract Address: {this.props.transactionObject.logs[0].address}</p>
+    <p>Contract Deployed From Wallet Address: {this.state.userWallet} </p>
+    <p> Transaction Address: {this.props.transactionObject.receipt.transactionHash}</p>
     </div>
   )
   } else {
@@ -80,6 +89,7 @@ renderSubmitInfo(){
 
   render() {
     console.log('props', this.props);
+    console.log('state', this.state);
     return(
       <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit.bind(this)}>
         <fieldset>

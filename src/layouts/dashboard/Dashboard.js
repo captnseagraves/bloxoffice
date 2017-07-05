@@ -62,7 +62,8 @@ renderSubmitInfo(){
 }
 
   render() {
-    console.log(this.props.authData);
+    console.log('dashState', this.state);
+    console.log('dashProps', this.props);
 
     return(
       <main className="container">

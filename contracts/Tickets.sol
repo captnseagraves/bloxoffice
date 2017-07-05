@@ -3,10 +3,29 @@ pragma solidity ^0.4.8;
 /*Need to write fallback function*/
 
 
+contract MyToken {
+    /* This creates an array with all balances */
+    mapping (address => uint256) public balanceOf;
+
+    /* Initializes contract with initial supply tokens to the creator of the contract */
+    function MyToken(
+        uint256 initialSupply
+        ) {
+        balanceOf[this] = initialSupply;              // Give the creator all initial tokens
+    }
+
+    /* Send coins */
+    function transfer(address _to, uint256 _value) {
+        if (balanceOf[this] < _value) throw;           // Check if the sender has enough
+        if (balanceOf[_to] + _value < balanceOf[_to]) throw; // Check for overflows
+        balanceOf[this] -= _value;                     // Subtract from the sender
+        balanceOf[_to] += _value;                            // Add the same to the recipient
+    }
+}
+
 contract EventCreator {
 
   /*index of created events*/
-
   address[] public allEvents;
 
   event createContract(address _from, string _eventName);
@@ -26,39 +45,9 @@ contract EventCreator {
  {
    return allEvents.length;
  }
-
-  /*function createEvent(
-    uint quota,
-    uint ticketPrice,
-    string eventName,
-    string eventDescription,
-    string eventLocation,
-    string imageURL)
-    public
-    returns (address newUserEvent)
-    {
-    UserEvent ue = new UserEvent(
-      quota,
-      ticketPrice,
-      eventName,
-      eventDescription,
-      eventLocation,
-      imageURL);
-    createContract(this, eventName);
-    allEvents.push(ue);
-    return ue;*/
-  /*}*/
-  /*function createEvent(uint quota, uint ticketPrice, bytes32 eventName, bytes32 eventDescription) returns (UserEvent eventAddress) {
-  return new UserEvent(quota, ticketPrice, eventName, eventDescription);
-  }*/
-
-  /*function createEvent() returns (UserEvent eventAddress) {
-    EventData[eventID] = EventData.length;
-    return new UserEvent(100, 5, 'dance', 'move feet');
-  }*/
 }
 
-contract UserEvent is EventCreator {
+contract UserEvent is EventCreator, MyToken {
 
   /*Need to create Array of tickets based on quota*/
   EventCreator creator;
