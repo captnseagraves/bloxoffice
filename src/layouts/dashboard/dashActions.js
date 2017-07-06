@@ -4,16 +4,18 @@ import store from '../../store'
 
 const contract = require('truffle-contract')
 
-export const USER_UPDATED = 'USER_UPDATED'
+var ticketPrice = localStorage.getItem('ticketPrice')
+
+export const TICKET_PURCHASED = 'TICKET_PURCHASED'
 function userUpdated(transaction) {
-  console.log('userUpdated');
+  console.log('TICKET_PURCHASED');
   return {
-    type: USER_UPDATED,
+    type: TICKET_PURCHASED,
     data: transaction
   }
 }
 
-export function updateUser(eventName, eventDescription, eventLocation, imageURL, quota, ticketPrice) {
+export function updateUser() {
   let web3 = store.getState().web3.web3Instance
 
   // Double-check web3's status.
@@ -37,10 +39,10 @@ export function updateUser(eventName, eventDescription, eventLocation, imageURL,
         authentication.deployed().then(function(instance) {
           authenticationInstance = instance
           // Attempt to login user.
-
-          console.log('we made it');
+          console.log('inside the blockchain');
+          console.log('instance', instance);
           // //
-          // instance.createEvent(quota, ticketPrice, eventName, eventDescription, eventLocation, imageURL, {from: coinbase, gas: 900000}).then(function(result){
+          // instance.send(coinbase, ticketPrice {from: coinbase, gas: 900000}).then(function(result){
           //   console.log(result);
           //
           //

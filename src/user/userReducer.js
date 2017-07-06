@@ -3,8 +3,14 @@ const initialState = {
 }
 
 const userReducer = (state = initialState, action) => {
-  console.log('IN THE REDUCeR', action.type);
-console.log('IN THE REDUCeR', typeof action.type);
+
+  if (action.type === 'TICKET_PURCHASED')
+  {
+    console.log('in the reducer');
+    return Object.assign({}, state, {
+      transactionObject: action.data
+    })
+  }
 
 if (action.type === 'USER_UPDATED')
 {

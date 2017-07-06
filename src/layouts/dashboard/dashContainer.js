@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
-import ProfileForm from './Dashboard'
+import Dashboard from './Dashboard'
 import { updateUser } from './dashActions'
+
+console.log(Dashboard);
 
 const mapStateToProps = (state, ownProps) => {
   return {

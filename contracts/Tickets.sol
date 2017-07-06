@@ -8,7 +8,7 @@ contract MyToken {
     mapping (address => uint256) public balanceOf;
 
     /* Initializes contract with initial supply tokens to the creator of the contract */
-    function MyToken(
+    function BloxToken(
         uint256 initialSupply
         ) {
         balanceOf[this] = initialSupply;              // Give the creator all initial tokens
@@ -47,10 +47,11 @@ contract EventCreator {
  }
 }
 
-contract UserEvent is EventCreator, MyToken {
+contract UserEvent is MyToken {
 
   /*Need to create Array of tickets based on quota*/
-  EventCreator creator;
+
+  UserEvent creator;
   mapping (address => uint) public registrantsPaid;
   address public organizer;
   uint public numRegistrants = 0;
@@ -82,8 +83,9 @@ contract UserEvent is EventCreator, MyToken {
     eventDescription = _eventDescription;
     eventLocation = _eventLocation;
     imageURL = _imageURL;
-    EventCreator.allEvents.push(this);
+    /*EventCreator.allEvents.push(this);*/
     newEvent(this, eventName);
+    MyToken.BloxToken(quota);
   }
 
   /*function something(
@@ -104,6 +106,7 @@ contract UserEvent is EventCreator, MyToken {
       throw;
 
     registrantsPaid[msg.sender] = msg.value;
+    MyToken.transfer(msg.sender, 1);
     numRegistrants++;
     Deposit(msg.sender, msg.value);
     // send a percentage to EventCreator

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import dashContainer from './dashContainer'
 
 
 const contract = require('truffle-contract')
@@ -23,12 +24,23 @@ class Dashboard extends Component {
   }
 }
 
-  clickHandler(event) {
-  console.log('were here');
+clickHandler(event) {
+  event.preventDefault()
+
   this.setState({
     hasSubmitted: true
   })
+
+  this.props.onProfileFormSubmit(
+    this.state.eventName,
+    this.state.eventDescription,
+    this.state.eventLocation,
+    this.state.imageURL,
+    this.state.quota,
+    this.state.ticketPrice
+  )
 }
+
 
 componentWillMount(){
   this.setState({
@@ -62,8 +74,7 @@ renderSubmitInfo(){
 }
 
   render() {
-    console.log('dashState', this.state);
-    console.log('dashProps', this.props);
+    console.log('dashprops', this.props);
 
     return(
       <main className="container">
