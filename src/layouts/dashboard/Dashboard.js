@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
-import dashContainer from './dashContainer'
+import { updateUser } from './dashActions'
+import { connect } from 'react-redux'
 
 
 const contract = require('truffle-contract')
@@ -20,6 +21,7 @@ class Dashboard extends Component {
     userWallet: '',
     contractAddress: '',
     transactionAddress: '',
+    blockHash: '',
     hasSubmitted: false
   }
 }
@@ -52,7 +54,8 @@ componentWillMount(){
     ticketPrice: localStorage.getItem('ticketPrice'),
     userWallet: localStorage.getItem('coinbase'),
     contractAddress: localStorage.getItem('contractAddress'),
-    transactionAddress: localStorage.getItem('transactionAddress')
+    transactionAddress: localStorage.getItem('transactionAddress'),
+    blockHash: localStorage.getItem('blockHash')
   })
 }
 
@@ -63,7 +66,7 @@ renderSubmitInfo(){
       <h1 className="green">Ticket purchased! Have fun at {this.state.eventName}!</h1>
       <p>Contract Address: {this.state.contractAddress}</p>
       <p>Ticket Purchased from Wallet Address: {this.state.userWallet}</p>
-      <p> Transaction Address: </p>
+      <p> Transaction Address: {this.state.blockHash}</p>
       </div>
     )
   } else {
@@ -113,4 +116,25 @@ renderSubmitInfo(){
   }
 }
 
-export default Dashboard
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    eventName: state.eventName,
+    transactionObject: state.user.transactionObject
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onProfileFormSubmit: () => {
+      event.preventDefault();
+
+      dispatch(updateUser())
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard)

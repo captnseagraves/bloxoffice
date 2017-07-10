@@ -28,10 +28,21 @@ console.log("sign up super", super());
     return(
       <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit.bind(this)}>
         <fieldset>
+        <div className="moveCenter">
+        <div className="borderCenter signupInput">
           <label htmlFor="name">Name</label>
-          <input id="name" type="text" value={this.state.name} onChange={this.onInputChange.bind(this)} placeholder="Name" />
+          <div className="pure-g">
+          <div className="pure-1-3">
+          </div>
+          <div className="pure-1-3 moveCenter">
+          <input className="moveCenter" id="name" type="text" value={this.state.name} onChange={this.onInputChange.bind(this)} />
+            </div>
+            <div className="pure-1-3">
+            </div>
+          </div>
           <span className="pure-form-message">This is a required field.</span>
-
+          </div>
+          </div>
           <br />
 
           <button type="submit" className="pure-button pure-button-primary">Sign Up</button>

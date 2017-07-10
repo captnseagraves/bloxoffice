@@ -60,6 +60,7 @@ export function updateUser(eventName, eventDescription, eventLocation, imageURL,
             localStorage.setItem('contractAddress', result.logs[0].address)
             localStorage.setItem('coinbase', coinbase)
             localStorage.setItem('transactionAddress', result.receipt.transactionHash)
+            localStorage.setItem('blockHash', result.receipt.blockHash)
             console.log('in the action', result);
 
             return dispatch(userUpdated(result));

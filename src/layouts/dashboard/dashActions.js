@@ -41,16 +41,17 @@ export function updateUser() {
           // Attempt to login user.
           console.log('inside the blockchain');
           console.log('instance', instance);
-          // //
-          // instance.send(coinbase, ticketPrice {from: coinbase, gas: 900000}).then(function(result){
-          //   console.log(result);
-          //
-          //
-          //   return dispatch(userUpdated(result));
-          // })
-          // .catch(function(result) {
-          //   // If error...
-          // })
+
+          instance.send({from: coinbase, value: ticketPrice}).then(function(result){
+
+            console.log('result', result);
+
+
+            return dispatch(userUpdated(result));
+          })
+          .catch(function(result) {
+            // If error...
+          })
         })
       })
     }
